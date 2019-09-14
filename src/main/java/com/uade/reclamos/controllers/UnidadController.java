@@ -16,12 +16,12 @@ import views.UnidadView;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/edificios")
-public class EdificioController {
+@RequestMapping(value = "/unidades")
+public class UnidadController {
 
-    @RequestMapping(method = RequestMethod.GET, produces = "application/json")
-    public HttpEntity<List<EdificioView>> listarEdificios() throws UnidadException, EdificioException {
-        return new ResponseEntity<>(Controlador.getInstancia().getEdificios(), HttpStatus.OK);
+    @RequestMapping(method = RequestMethod.GET, path = "/edificios/{id_edificio}",produces = "application/json")
+    public HttpEntity<List<UnidadView>> listarUnidadesPorEdificio(@PathVariable("id_edificio") int idEdificio) throws UnidadException, EdificioException {
+        return new ResponseEntity<>(Controlador.getInstancia().getUnidadesPorEdificio(idEdificio), HttpStatus.OK);
     }
 
 }
