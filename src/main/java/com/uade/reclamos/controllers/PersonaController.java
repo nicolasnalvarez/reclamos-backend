@@ -20,34 +20,34 @@ import java.util.List;
 @RequestMapping
 public class PersonaController {
 
-    @RequestMapping(method = RequestMethod.GET, path = "/habilitados/edificios", produces = "application/json")
+    @RequestMapping(method = RequestMethod.GET, path = "/habilitados/edificios/{id_edificio}", produces = "application/json")
     public HttpEntity<List<PersonaView>> listarHabilitadosPorEdificio(@PathVariable("id_edificio") int idEdificio) throws EdificioException, PersonaException, UnidadException {
         return new ResponseEntity<>(Controlador.getInstancia().habilitadosPorEdificio(idEdificio), HttpStatus.OK);
     }
 
-    @RequestMapping(method = RequestMethod.GET, path = "/dueños/edificios", produces = "application/json")
+    @RequestMapping(method = RequestMethod.GET, path = "/dueños/edificios/{id_edificio}", produces = "application/json")
     public HttpEntity<List<PersonaView>> listarDueñosPorEdificio(@PathVariable("id_edificio") int idEdificio) throws EdificioException, PersonaException, UnidadException {
         return new ResponseEntity<>(Controlador.getInstancia().dueniosPorEdificio(idEdificio), HttpStatus.OK);
     }
 
-    @RequestMapping(method = RequestMethod.GET, path = "/inquilinos/edificios", produces = "application/json")
+    @RequestMapping(method = RequestMethod.GET, path = "/inquilinos/edificios/{id_edificio}", produces = "application/json")
     public HttpEntity<List<PersonaView>> listarInquilinosPorEdificio(@PathVariable("id_edificio") int idEdificio) throws EdificioException, PersonaException, UnidadException {
         return new ResponseEntity<>(Controlador.getInstancia().inquilinosPorEdificio(idEdificio), HttpStatus.OK);
     }
 
-    @RequestMapping(method = RequestMethod.GET, path = "/habitantes/edificios", produces = "application/json")
+    @RequestMapping(method = RequestMethod.GET, path = "/habitantes/edificios/{id_edificio}", produces = "application/json")
     public HttpEntity<List<PersonaView>> listarHabitantesPorEdificio(@PathVariable("id_edificio") int idEdificio) throws EdificioException, PersonaException, UnidadException {
         return new ResponseEntity<>(Controlador.getInstancia().habitantesPorEdificio(idEdificio), HttpStatus.OK);
     }
 
-    @RequestMapping(method = RequestMethod.GET, path = "/dueños/unidades", produces = "application/json")
+    @RequestMapping(method = RequestMethod.GET, path = "/dueños/unidades/{id_edificio}/{piso}/{numero}", produces = "application/json")
     public HttpEntity<List<PersonaView>> listarDueñosPorUnidad(@PathVariable("id_edificio") int idEdificio,
                                                                @PathVariable("piso") String piso,
                                                                @PathVariable("numero") String numero) throws EdificioException, PersonaException, UnidadException {
         return new ResponseEntity<>(Controlador.getInstancia().dueniosPorUnidad(idEdificio, piso, numero), HttpStatus.OK);
     }
 
-    @RequestMapping(method = RequestMethod.GET, path = "/inquilinos/unidades", produces = "application/json")
+    @RequestMapping(method = RequestMethod.GET, path = "/inquilinos/unidades/{id_edificio}/{piso}/{numero}", produces = "application/json")
     public HttpEntity<List<PersonaView>> listarInquilinosPorUnidad(@PathVariable("id_edificio") int idEdificio,
                                                                @PathVariable("piso") String piso,
                                                                @PathVariable("numero") String numero) throws EdificioException, PersonaException, UnidadException {
