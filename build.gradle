@@ -36,6 +36,5 @@ dependencies {
         exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
     }
 
-    compile files('libs/Administracion-nico.jar')
-    //compile files('libs/Administracion-dario-lucas.jar')
+    compile files('libs/AdministracionAD.jar')
 }
