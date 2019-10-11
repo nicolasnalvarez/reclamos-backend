@@ -30,4 +30,9 @@ public class ReclamoController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
+    @RequestMapping(method = RequestMethod.GET, produces = "application/json")
+    public HttpEntity<ReclamoView> getReclamo(Integer idreclamo) {
+        return new ResponseEntity<>(Controlador.getInstancia().getReclamo(idreclamo), HttpStatus.OK);
+    }
+
 }
