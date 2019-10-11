@@ -1,8 +1,8 @@
 package com.uade.reclamos.controllers;
 
+import com.uade.reclamos.model.NuevoReclamoRequest;
 import controlador.Controlador;
 import exceptions.ReclamoException;
-import modelo.Reclamo;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,9 +25,9 @@ public class ReclamoController {
     }
 
     @RequestMapping(method = RequestMethod.POST, produces = "application/json")
-    public HttpEntity<Void> listarTodosLosReclamos(@RequestBody @Valid Reclamo reclamo) {
-        Controlador.getInstancia().generarReclamo(reclamo);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    public HttpEntity<Void> generarReclamo(@RequestBody @Valid NuevoReclamoRequest reclamoRequest) {
+        Controlador.getInstancia().generarReclamo(reclamoRequest.getReclamo(), reclamoRequest.getImagenes());
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
 }
