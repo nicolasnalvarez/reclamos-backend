@@ -6,10 +6,7 @@ import exceptions.ReclamoException;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import views.ReclamoView;
 
 import javax.validation.Valid;
@@ -30,8 +27,8 @@ public class ReclamoController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @RequestMapping(method = RequestMethod.GET, produces = "application/json")
-    public HttpEntity<ReclamoView> getReclamo(Integer idreclamo) {
+    @RequestMapping(method = RequestMethod.GET, path = "/{id_reclamo}", produces = "application/json")
+    public HttpEntity<ReclamoView> getReclamo(@PathVariable("id_reclamo") int idreclamo) {
         return new ResponseEntity<>(Controlador.getInstancia().getReclamo(idreclamo), HttpStatus.OK);
     }
 
