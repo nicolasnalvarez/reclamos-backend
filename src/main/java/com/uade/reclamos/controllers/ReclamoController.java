@@ -2,7 +2,10 @@ package com.uade.reclamos.controllers;
 
 import com.uade.reclamos.model.NuevoReclamoRequest;
 import controlador.Controlador;
+import exceptions.EdificioException;
+import exceptions.PersonaException;
 import exceptions.ReclamoException;
+import exceptions.UnidadException;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,9 +25,9 @@ public class ReclamoController {
     }
 
     @RequestMapping(method = RequestMethod.POST, produces = "application/json")
-    public HttpEntity<Void> generarReclamo(@RequestBody @Valid NuevoReclamoRequest reclamoRequest) {
-        Controlador.getInstancia().generarReclamo(reclamoRequest.getReclamo(), reclamoRequest.getImagenes());
-        return new ResponseEntity<>(HttpStatus.CREATED);
+    public HttpEntity<Integer> generarReclamo(@RequestBody @Valid NuevoReclamoRequest reclamoRequest) throws EdificioException, PersonaException, UnidadException {
+        int idNuevoReclamo = Controlador.getInstancia().generarReclamo(reclamoRequest.getReclamo(), reclamoRequest.getImagenes());
+        return new ResponseEntity<>(idNuevoReclamo, HttpStatus.CREATED);
     }
 
     @RequestMapping(method = RequestMethod.GET, path = "/{id_reclamo}", produces = "application/json")

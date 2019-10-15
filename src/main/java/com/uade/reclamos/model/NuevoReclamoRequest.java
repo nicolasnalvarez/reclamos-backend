@@ -1,15 +1,15 @@
 package com.uade.reclamos.model;
 
 import lombok.Data;
-import modelo.Imagen;
-import modelo.Reclamo;
+import request.ImagenRequest;
+import request.ReclamoRequest;
 
 import java.util.List;
 
 @Data
 public class NuevoReclamoRequest {
 
-    private Reclamo reclamo;
-    private List<Imagen> imagenes;
+    private ReclamoRequest reclamo;
+    private List<ImagenRequest> imagenes;
 
 }

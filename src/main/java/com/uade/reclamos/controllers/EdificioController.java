@@ -22,9 +22,9 @@ public class EdificioController {
         return new ResponseEntity<>(Controlador.getInstancia().getEdificios(), HttpStatus.OK);
     }
 
-    @RequestMapping(method = RequestMethod.GET, path = "/personas", produces = "application/json")
-    public HttpEntity<List<EdificioView>> getEdificiosPorDocumentoYTipoUsuario(@RequestParam("documento") String documento,
-                                                                               @RequestParam("tipo_usuario") int tipoUsuario) throws PersonaException {
+    @RequestMapping(method = RequestMethod.GET, path = "/personas/{tipo_usuario}/{documento}", produces = "application/json")
+    public HttpEntity<List<EdificioView>> getEdificiosPorDocumentoYTipoUsuario(@PathVariable("tipo_usuario") int tipoUsuario,
+                                                                               @PathVariable("documento") String documento) throws PersonaException {
         if (tipoUsuario == 1) {
             return new ResponseEntity<>(Controlador.getInstancia().getEdificiosByDocumentoDuenio(documento), HttpStatus.OK);
         } else {
