@@ -25,5 +25,10 @@ public class AccessController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
+    @RequestMapping(method = RequestMethod.POST,path = "/auth/changepass", produces = "application/json")
+    public HttpEntity<Void> cambioPassword(@RequestBody @Valid LoginRequest loginRequest) {
+        return new ResponseEntity<>(Controlador.getInstancia().cambioPassword(loginRequest.getNombre(), loginRequest.getPassword()), HttpStatus.OK);
+    }
+
 
 }
