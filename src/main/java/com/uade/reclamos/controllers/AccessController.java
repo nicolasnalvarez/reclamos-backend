@@ -23,9 +23,9 @@ import javax.validation.Valid;
 public class AccessController {
 
     @RequestMapping(method = RequestMethod.POST,path = "/register", produces = "application/json")
-    public HttpEntity<Void> registrar(@RequestBody @Valid RegisterRequest registerRequest) throws PersonaException {
+    public HttpEntity<Void> registrar(@RequestBody @Valid RegisterRequest registerRequest) throws PersonaException, UsuarioException {
         System.out.println("Se intenta registrar al usuario " + registerRequest.getNombre() + " con clave " + registerRequest.getPassword());
-        Controlador.getInstancia().registrar(registerRequest.getDni(),registerRequest.getNombre(), registerRequest.getPassword());
+        Controlador.getInstancia().registrar(registerRequest.getDni(),registerRequest.getNombre(), registerRequest.getPassword(), null);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 

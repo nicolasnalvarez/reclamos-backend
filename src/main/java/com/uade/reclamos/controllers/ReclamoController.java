@@ -19,11 +19,6 @@ import java.util.List;
 @RequestMapping(value = "/reclamos")
 public class ReclamoController {
 
-    @RequestMapping(method = RequestMethod.GET, produces = "application/json")
-    public HttpEntity<List<ReclamoView>> listarTodosLosReclamos() throws ReclamoException {
-        return new ResponseEntity<>(Controlador.getInstancia().todosLosReclamos(), HttpStatus.OK);
-    }
-
     @RequestMapping(method = RequestMethod.POST, produces = "application/json")
     public HttpEntity<Integer> generarReclamo(@RequestBody @Valid NuevoReclamoRequest reclamoRequest) throws EdificioException, PersonaException, UnidadException {
         int idNuevoReclamo = Controlador.getInstancia().generarReclamo(reclamoRequest.getReclamo(), reclamoRequest.getImagenes());
@@ -31,8 +26,13 @@ public class ReclamoController {
     }
 
     @RequestMapping(method = RequestMethod.GET, path = "/{id_reclamo}", produces = "application/json")
-    public HttpEntity<ReclamoView> getReclamo(@PathVariable("id_reclamo") int idreclamo) {
+    public HttpEntity<ReclamoView> getReclamo(@PathVariable("id_reclamo") int idreclamo) throws ReclamoException {
         return new ResponseEntity<>(Controlador.getInstancia().getReclamo(idreclamo), HttpStatus.OK);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, path = "all/{documento}", produces = "application/json")
+    public HttpEntity<List<ReclamoView>> getMisReclamos(@PathVariable("documento") String documento) throws ReclamoException {
+        return new ResponseEntity<>(Controlador.getInstancia().getReclamosByDNI(documento), HttpStatus.OK);
     }
 
 }
