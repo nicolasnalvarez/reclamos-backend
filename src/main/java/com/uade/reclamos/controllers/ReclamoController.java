@@ -1,5 +1,6 @@
 package com.uade.reclamos.controllers;
 
+import com.uade.reclamos.model.EstadoRequest;
 import com.uade.reclamos.model.NuevoReclamoRequest;
 import controlador.Controlador;
 import exceptions.EdificioException;
@@ -29,6 +30,21 @@ public class ReclamoController {
     public HttpEntity<ReclamoView> getReclamo(@PathVariable("id_reclamo") int idreclamo) throws ReclamoException {
         return new ResponseEntity<>(Controlador.getInstancia().getReclamo(idreclamo), HttpStatus.OK);
     }
+
+    @RequestMapping(method = RequestMethod.POST, path = "/{id_reclamo}/cambiar_estado", produces = "application/json")
+    public HttpEntity<Integer> cambiarEstado(@RequestBody @Valid EstadoRequest nuevoEstado) throws EdificioException, PersonaException, UnidadException {
+        Controlador.getInstancia().cambiarEstado()
+        return new ResponseEntity<>(nuevoEstado, HttpStatus.CREATED);
+    }
+
+    @PatchMapping(path="/{id_reclamo}/update", produces = "application/json")
+    public @ResponseBody String updateUser(@PathVariable int id_reclamo, @RequestBody NuevoReclamoRequest reclamoRequest) throws ReclamoException {
+        ReclamoView reclamoStored = (ReclamoView) Controlador.getInstancia().getReclamo(id_reclamo);
+        reclamoStored.setImagesPaths(reclamoRequest.getImagenes());
+        Controlador.getInstancia().actualizarReclamo(reclamoStored);
+        return new ResponseEntity<>(reclamoRequest, HttpStatus.ACCEPTED);
+    }
+
 
     @RequestMapping(method = RequestMethod.GET, path = "all/{documento}", produces = "application/json")
     public HttpEntity<List<ReclamoView>> getMisReclamos(@PathVariable("documento") String documento) throws ReclamoException {
